@@ -1,230 +1,53 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Untuk Kamu ❤️</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Sacramento&display=swap" rel="stylesheet">
-
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
-}
-
-body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
-background:linear-gradient(135deg,#ffd6e7,#ffeef5,#fff8fb);
-}
-
-/* Floating Hearts */
-
-.hearts{
-position:absolute;
-width:100%;
-height:100%;
-overflow:hidden;
-}
-
-.hearts span{
-position:absolute;
-bottom:-50px;
-font-size:20px;
-animation:float linear infinite;
-opacity:.6;
-}
-
-@keyframes float{
-0%{
-transform:translateY(0) rotate(0deg);
-opacity:0;
-}
-20%{
-opacity:1;
-}
-100%{
-transform:translateY(-120vh) rotate(360deg);
-opacity:0;
-}
-}
-
-/* Envelope */
-
-.container{
-position:relative;
-cursor:pointer;
-transition:.5s;
-}
-
-.envelope{
-position:relative;
-width:320px;
-height:220px;
-background:#ff8fb1;
-border-radius:0 0 10px 10px;
-overflow:hidden;
-box-shadow:0 20px 45px rgba(0,0,0,.2);
-}
-
-.cover{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-transform-origin:top;
-transition:1s ease;
-z-index:3;
-}
-
-.cover:before{
-content:'';
-position:absolute;
-border-left:160px solid transparent;
-border-right:160px solid transparent;
-border-top:110px solid #ff5f95;
-}
-
-.cover:after{
-content:'';
-position:absolute;
-top:0;
-border-left:160px solid #ff8fb1;
-border-right:160px solid #ff8fb1;
-border-bottom:110px solid transparent;
-}
-
-.letter{
-position:absolute;
-left:50%;
-top:20px;
-transform:translateX(-50%);
-width:280px;
-height:180px;
-background:white;
-border-radius:10px;
-padding:25px;
-text-align:center;
-transition:1s;
-z-index:1;
-box-shadow:0 10px 20px rgba(0,0,0,.15);
-overflow:auto;
-}
-
-.letter h2{
-font-family:Sacramento;
-font-size:42px;
-color:#ff4b86;
-margin-bottom:10px;
-}
-
-.letter p{
-font-size:15px;
-color:#555;
-line-height:1.8;
-}
-
-.open .cover{
-transform:rotateX(180deg);
-}
-
-.open .letter{
-top:-150px;
-transform:translateX(-50%) scale(1.03);
-}
-
-.click{
-position:absolute;
-width:100%;
-text-align:center;
-bottom:-50px;
-font-size:15px;
-color:#ff4b86;
-animation:blink 1.5s infinite;
-}
-
-@keyframes blink{
-50%{
-opacity:.3;
-}
-}
-</style>
-</head>
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden;background:linear-gradient(135deg,#ffd6e7,#fff5f8,#ffe4ef);transition:1s}
+.loading{position:fixed;inset:0;background:#fff5f9;display:flex;align-items:center;justify-content:center;font-size:26px;color:#ff4b86;z-index:99;animation:hide 2.5s forwards}
+@keyframes hide{80%{opacity:1}100%{opacity:0;visibility:hidden}}
+.hearts span{position:absolute;bottom:-40px;animation:up linear infinite}
+@keyframes up{to{transform:translateY(-120vh) rotate(360deg);opacity:0}}
+.container{position:relative;cursor:pointer;animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px)}}
+.envelope{width:340px;height:220px;background:#ff8fb1;position:relative;border-radius:0 0 12px 12px;box-shadow:0 20px 40px rgba(0,0,0,.2);animation:beat 2s infinite}
+@keyframes beat{50%{transform:scale(1.04)}}
+.cover{position:absolute;inset:0;transform-origin:top;transition:1.2s}
+.cover:before{content:"";position:absolute;border-left:170px solid transparent;border-right:170px solid transparent;border-top:110px solid #ff5f95}
+.cover:after{content:"";position:absolute;border-left:170px solid #ff8fb1;border-right:170px solid #ff8fb1;border-bottom:110px solid transparent}
+.letter{position:absolute;left:50%;top:25px;transform:translateX(-50%);width:300px;height:190px;background:#fff;padding:18px;border-radius:10px;overflow:auto;transition:1.2s}
+h2{text-align:center;color:#ff4b86;margin-bottom:10px}
+p{line-height:1.7;color:#555;white-space:pre-wrap}
+.open .cover{transform:rotateX(180deg)}
+.open .letter{top:-210px;transform:translateX(-50%) scale(1.04) rotate(-1deg)}
+.click{text-align:center;margin-top:15px;color:#ff4b86}
+button{margin-top:15px;padding:10px 20px;border:none;border-radius:30px;background:#ff4b86;color:#fff;display:none}
+.open button{display:block;margin-left:auto;margin-right:auto}
+</style></head>
 <body>
-
+<div class="loading">💌 Menyiapkan surat spesial...</div>
 <div class="hearts"></div>
-
 <div class="container" onclick="openLetter()">
-
 <div class="envelope">
-
 <div class="cover"></div>
-
 <div class="letter">
-
 <h2>Hai Sayang ❤️</h2>
+<p id="text"></p>
+<button onclick="event.stopPropagation();alert('🤍 Makasih ya udah bertahan. Aku bakal terus belajar jadi yang terbaik buat kamu. I Love You ❤️')">Peluk Virtual 🤍</button>
+</div></div>
+<div class="click">Klik Amplop 💌</div></div>
+<script>
+const msg=`Sayang, kalau ada sikap atau perkataan aku yang bikin kamu capek, kecewa, atau nggak nyaman, tolong bilang ya. Aku nggak bakal marah kok. Aku pengen belajar jadi lebih baik buat kita.
 
-<p>
-Sayang, kalau ada sikap atau perkataan aku yang bikin kamu capek, kecewa, atau nggak nyaman, tolong bilang ya. Aku nggak bakal marah kok, justru aku pengen denger supaya aku bisa belajar jadi lebih baik buat kita.
-
-Terus, kalau lagi ada masalah, entah itu tentang keluarga atau hal lain yang lagi kamu pendam, cerita aja ke aku kalau kamu udah siap. Aku bakal dengerin tanpa nge-judge, dan semua yang kamu ceritain bakal aku jaga, nggak akan aku cerita ke siapa-siapa. Aku mungkin nggak selalu bisa nyelesain masalahnya, tapi aku pengen kamu tahu kalau kamu nggak harus ngejalaninnya sendirian.
+Kalau lagi ada masalah, entah itu tentang keluarga atau hal lain, cerita aja ke aku kalau kamu udah siap. Aku bakal dengerin, nggak nge-judge, dan semua cerita kamu bakal aku rahasiain.
 
 Aku cuma pengen jadi tempat yang bikin kamu ngerasa aman dan nyaman buat pulang cerita.
-Dan satu hal yang selalu pengen aku ingetin, kamu layak diperlakukan dengan baik. Kamu juga pantas diperjuangin, disayang dengan tulus, dan dihargai apa adanya. Jangan pernah ngerasa kamu harus berjuang sendirian, karena selama aku masih ada, aku juga mau ikut berjuang buat kamu. ❤️
-I Love You.
-</p>
 
-</div>
+Dan satu hal yang selalu pengen aku ingetin, kamu layak diperlakukan dengan baik. Kamu juga pantas diperjuangin, disayang dengan tulus, dan dihargai apa adanya. Selama aku masih ada, aku bakal ikut berjuang buat kamu.
 
-</div>
-
-<div class="click">
-Klik Amplop 💌
-</div>
-
-</div>
-
-<script>
-
-const container=document.querySelector(".container");
-
-function openLetter(){
-container.classList.toggle("open");
-}
-
-const hearts=document.querySelector(".hearts");
-
-function createHeart(){
-
-const heart=document.createElement("span");
-
-heart.innerHTML=["💖","💕","💗","🤍","💘"][Math.floor(Math.random()*5)];
-
-heart.style.left=Math.random()*100+"%";
-
-heart.style.animationDuration=(5+Math.random()*5)+"s";
-
-heart.style.fontSize=(18+Math.random()*20)+"px";
-
-hearts.appendChild(heart);
-
-setTimeout(()=>{
-heart.remove();
-},10000);
-
-}
-
-setInterval(createHeart,300);
-
-</script>
-
-</body>
-</html>
+I Love You ❤️`;
+let done=false;
+function type(){const t=document.getElementById('text');let i=0;t.textContent='';(function w(){if(i<msg.length){t.textContent+=msg[i++];setTimeout(w,28);}})();}
+function openLetter(){const c=document.querySelector('.container');c.classList.toggle('open');if(!done){done=true;setTimeout(type,900);}}
+setInterval(()=>{let s=document.createElement('span');s.textContent=['💖','💕','💗','🤍'][Math.floor(Math.random()*4)];s.style.left=Math.random()*100+'%';s.style.fontSize=(16+Math.random()*20)+'px';s.style.animationDuration=(5+Math.random()*4)+'s';document.querySelector('.hearts').appendChild(s);setTimeout(()=>s.remove(),9000);},250);
+</script></body></html>
