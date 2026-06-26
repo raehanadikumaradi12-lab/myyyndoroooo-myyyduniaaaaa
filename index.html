@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Kamu ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Sacramento&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+background:linear-gradient(135deg,#ffd6e7,#ffeef5,#fff8fb);
+}
+
+/* Floating Hearts */
+
+.hearts{
+position:absolute;
+width:100%;
+height:100%;
+overflow:hidden;
+}
+
+.hearts span{
+position:absolute;
+bottom:-50px;
+font-size:20px;
+animation:float linear infinite;
+opacity:.6;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
+}
+
+/* Envelope */
+
+.container{
+position:relative;
+cursor:pointer;
+transition:.5s;
+}
+
+.envelope{
+position:relative;
+width:320px;
+height:220px;
+background:#ff8fb1;
+border-radius:0 0 10px 10px;
+overflow:hidden;
+box-shadow:0 20px 45px rgba(0,0,0,.2);
+}
+
+.cover{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+transform-origin:top;
+transition:1s ease;
+z-index:3;
+}
+
+.cover:before{
+content:'';
+position:absolute;
+border-left:160px solid transparent;
+border-right:160px solid transparent;
+border-top:110px solid #ff5f95;
+}
+
+.cover:after{
+content:'';
+position:absolute;
+top:0;
+border-left:160px solid #ff8fb1;
+border-right:160px solid #ff8fb1;
+border-bottom:110px solid transparent;
+}
+
+.letter{
+position:absolute;
+left:50%;
+top:20px;
+transform:translateX(-50%);
+width:280px;
+height:180px;
+background:white;
+border-radius:10px;
+padding:25px;
+text-align:center;
+transition:1s;
+z-index:1;
+box-shadow:0 10px 20px rgba(0,0,0,.15);
+overflow:auto;
+}
+
+.letter h2{
+font-family:Sacramento;
+font-size:42px;
+color:#ff4b86;
+margin-bottom:10px;
+}
+
+.letter p{
+font-size:15px;
+color:#555;
+line-height:1.8;
+}
+
+.open .cover{
+transform:rotateX(180deg);
+}
+
+.open .letter{
+top:-150px;
+transform:translateX(-50%) scale(1.03);
+}
+
+.click{
+position:absolute;
+width:100%;
+text-align:center;
+bottom:-50px;
+font-size:15px;
+color:#ff4b86;
+animation:blink 1.5s infinite;
+}
+
+@keyframes blink{
+50%{
+opacity:.3;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<div class="container" onclick="openLetter()">
+
+<div class="envelope">
+
+<div class="cover"></div>
+
+<div class="letter">
+
+<h2>Hai Sayang ❤️</h2>
+
+<p>
+Sayang, kalau ada sikap atau perkataan aku yang bikin kamu capek, kecewa, atau nggak nyaman, tolong bilang ya. Aku nggak bakal marah kok, justru aku pengen denger supaya aku bisa belajar jadi lebih baik buat kita.
+
+Terus, kalau lagi ada masalah, entah itu tentang keluarga atau hal lain yang lagi kamu pendam, cerita aja ke aku kalau kamu udah siap. Aku bakal dengerin tanpa nge-judge, dan semua yang kamu ceritain bakal aku jaga, nggak akan aku cerita ke siapa-siapa. Aku mungkin nggak selalu bisa nyelesain masalahnya, tapi aku pengen kamu tahu kalau kamu nggak harus ngejalaninnya sendirian.
+
+Aku cuma pengen jadi tempat yang bikin kamu ngerasa aman dan nyaman buat pulang cerita.
+Dan satu hal yang selalu pengen aku ingetin, kamu layak diperlakukan dengan baik. Kamu juga pantas diperjuangin, disayang dengan tulus, dan dihargai apa adanya. Jangan pernah ngerasa kamu harus berjuang sendirian, karena selama aku masih ada, aku juga mau ikut berjuang buat kamu. ❤️
+I Love You.
+</p>
+
+</div>
+
+</div>
+
+<div class="click">
+Klik Amplop 💌
+</div>
+
+</div>
+
+<script>
+
+const container=document.querySelector(".container");
+
+function openLetter(){
+container.classList.toggle("open");
+}
+
+const hearts=document.querySelector(".hearts");
+
+function createHeart(){
+
+const heart=document.createElement("span");
+
+heart.innerHTML=["💖","💕","💗","🤍","💘"][Math.floor(Math.random()*5)];
+
+heart.style.left=Math.random()*100+"%";
+
+heart.style.animationDuration=(5+Math.random()*5)+"s";
+
+heart.style.fontSize=(18+Math.random()*20)+"px";
+
+hearts.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},10000);
+
+}
+
+setInterval(createHeart,300);
+
+</script>
+
+</body>
+</html>
